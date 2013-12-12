@@ -129,3 +129,5 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':                ['permitAll'],
     '/dbconsole/**':                  ['permitAll']
 ]
+
+ni.com.bar.tables = 16
