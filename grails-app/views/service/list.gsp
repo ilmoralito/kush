@@ -29,7 +29,11 @@
 			<tbody>
 				<g:each in="${services}" var="service" status="i">
 					<tr>
-						<td><g:link action="show" id="${service.id}">${i + 1}</g:link></td>
+						<td>
+							<g:link action="show" params="[id:service.id, type:(service instanceof ni.com.bar.Drink) ? 'drink' : 'food']">
+								${i + 1}
+							</g:link>
+						</td>
 						<td>
 							${service}
 							<g:if test="${service instanceof ni.com.bar.Drink}">

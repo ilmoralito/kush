@@ -8,7 +8,9 @@ class ServiceController {
 	static defaultAction = "list"
 	static allowedMethods = [
 		list:"GET",
-		create:["GET", "POST"]
+		create:["GET", "POST"],
+		show:"GET",
+		update:["POST", "PUT"]
 	]
 
     def list() {
@@ -44,4 +46,9 @@ class ServiceController {
     		}
     	}
     }
+
+    def show(Long id, String type) {
+
+    }
+
 }
