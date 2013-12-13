@@ -74,6 +74,9 @@ class BootStrap {
             }
         }
 
+        //cigar
+        def cigar = new Cigar(name:"Cigarro", price:25, size:"10").save()
+
     }
     def destroy = {
     }
