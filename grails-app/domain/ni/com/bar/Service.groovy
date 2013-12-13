@@ -4,6 +4,7 @@ class Service {
 
 	String name
 	BigDecimal price
+	Boolean status = true
 
 	Date dateCreated
 	Date lastUpdated

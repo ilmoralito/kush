@@ -10,7 +10,8 @@ class ServiceController {
 		list:"GET",
 		create:["GET", "POST"],
 		show:"GET",
-		update:["POST", "PUT"]
+		update:["POST", "PUT"],
+
 	]
 
     def list() {
@@ -25,30 +26,78 @@ class ServiceController {
     			def drink = new Drink(params)
 
     			if (!drink.save()) {
-    				return [drink:drink, type:type]
+    				return [service:drink, type:type]
     			}
-
-    			flash.message = "Nueva bebida guardada"
-    		} else {
+    		} else if (type == "food") {
     			def food = new Food(params)
 
     			if (!food.save()) {
-    				return [food:food, type:type]
+    				return [service:food, type:type]
     			}
+    		} else {
+    			def cigar = new Cigar(params)
 
-    			flash.message = "Nueva comida guardad"
+    			if (!cigar.save()) {
+    				return [service:cigar, type:type]
+    			}
     		}
+
+    		flash.message = "Guardado"
     	} else {
     		if (type == "drink") {
-    			return [food:new Drink(params)]
+    			return [service:new Drink(params)]
+    		} else if (type == "food") {
+    			return [service:new Food(params)]
     		} else {
-    			return [drink:new Food(params)]
+    			return [service:new Cigar(params)]
     		}
     	}
     }
 
     def show(Long id, String type) {
+		def service = Service.get(id)
 
+		if (!service) {
+			response.sendError 404
+		}
+
+		[service:service]
+    }
+
+    def update(Long id, String type) {
+		def service = Service.get(id)
+
+		if (!service) {
+			response.sendError 404
+		}
+
+		if (type == "drink") {
+			service.properties["name", "price", "brand", "measure"] = params
+		} else if (type == "food") {
+			service.properties["name", "price", "items"] = params
+		} else {
+			service.properties["name", "price", "brand", "size"] = params
+		}
+
+		if (!service.save()) {
+			chain action:"show", model:[service:service], params: [id:id, type:type]
+			return false
+		}
+
+		redirect action:"show", params:[id:id, type:type]
+    }
+
+    def changeStatus(Long id) {
+		def service = Service.get(id)
+
+		if (!service) {
+			response.sendError 404
+		}
+
+		service.status = !service.status
+		flash.message = "Estado cambiado"
+
+		redirect action:"list"
     }
 
 }

@@ -10,9 +10,10 @@
 
 	<div class="row">
 		<div class="col-md-12">
-			<div class="btn-group pull-right">
-				<g:link action="create" params="[type:'food']" class="btn btn-primary">Crear comida</g:link>
-				<g:link action="create" params="[type:'drink']" class="btn btn-primary">Crear bebida</g:link>
+			<div class="pull-right">
+				<g:link action="create" params="[type:'food']" class="btn btn-primary">Comida</g:link>
+				<g:link action="create" params="[type:'drink']" class="btn btn-primary">Bebida</g:link>
+				<g:link action="create" params="[type:'cigar']" class="btn btn-primary">Cigaro</g:link>
 			</div>
 		</div>
 	</div>
@@ -24,23 +25,25 @@
 					<th width="1">#</th>
 					<th>Nombre del servicio</th>
 					<th width="1">Precio</th>
+					<th width="1">Estado</th>
 				</tr>
 			</thead>
 			<tbody>
 				<g:each in="${services}" var="service" status="i">
 					<tr>
 						<td>
-							<g:link action="show" params="[id:service.id, type:(service instanceof ni.com.bar.Drink) ? 'drink' : 'food']">
+							<g:link action="show" params="[id:service.id, type:service.class.toString().tokenize('.')[3].toLowerCase()]">
 								${i + 1}
 							</g:link>
 						</td>
 						<td>
 							${service}
-							<g:if test="${service instanceof ni.com.bar.Drink}">
+							<g:if test="${service instanceof ni.com.bar.Drink || service instanceof ni.com.bar.Cigar}">
 								<strong>${service.brand}</strong>
 							</g:if>
 						</td>
 						<td>${service.price}</td>
+						<td><g:link action="changeStatus" id="${service.id}"><bar:serviceStatus status="${service?.status}"/></g:link></td>
 					</tr>
 				</g:each>
 			</tbody>

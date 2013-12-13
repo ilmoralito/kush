@@ -4,11 +4,11 @@
 	<meta charset="UTF-8">
 	<meta name="layout" content="main">
 	<title></title>
-	<r:require modules="bootstrap, app"/>
+	<r:require modules="bootstrap, service"/>
 </head>
 <body>
-	<g:hasErrors bean="${drink ?: food}">
-		<g:renderErrors bean="${drink ?: food}"/>
+	<g:hasErrors bean="${service}">
+		<g:renderErrors bean="${service}"/>
 	</g:hasErrors>
 	
 	<g:form action="create">
