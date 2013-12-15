@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-md-offset-2">
-				<h1>Bar Restaurant name</h1>
+				<h1>KUSH</h1>
 				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, quisquam, impedit voluptatem autem est quasi sunt repellat iure repudiandae nemo sapiente ipsam nihil officiis. Expedita, nisi modi impedit laborum. Qui.
 			</div>
 			<div class="col-md-4">

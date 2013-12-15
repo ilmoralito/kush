@@ -11,8 +11,8 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="pull-right">
-				<g:link action="create" params="[type:'food']" class="btn btn-primary">Comida</g:link>
 				<g:link action="create" params="[type:'drink']" class="btn btn-primary">Bebida</g:link>
+				<g:link action="create" params="[type:'food']" class="btn btn-primary">Comida</g:link>
 				<g:link action="create" params="[type:'cigar']" class="btn btn-primary">Cigaro</g:link>
 			</div>
 		</div>
@@ -36,12 +36,7 @@
 								${i + 1}
 							</g:link>
 						</td>
-						<td>
-							${service}
-							<g:if test="${service instanceof ni.com.bar.Drink || service instanceof ni.com.bar.Cigar}">
-								<strong>${service.brand}</strong>
-							</g:if>
-						</td>
+						<td>${service}</td>
 						<td>${service.price}</td>
 						<td><g:link action="changeStatus" id="${service.id}"><bar:serviceStatus status="${service?.status}"/></g:link></td>
 					</tr>

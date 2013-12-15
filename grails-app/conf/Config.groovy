@@ -120,7 +120,7 @@ grails.plugin.springsecurity.userLookup.userDomainClassName = 'ni.com.bar.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'ni.com.bar.UserRole'
 grails.plugin.springsecurity.authority.className = 'ni.com.bar.Role'
 grails.plugin.springsecurity.logout.postOnly = false
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/services"
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = "/tables"
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/':                              ['permitAll'],
 	'/index':                         ['permitAll'],

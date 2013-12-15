@@ -11,7 +11,7 @@ class ServiceController {
 		create:["GET", "POST"],
 		show:"GET",
 		update:["POST", "PUT"],
-
+        changeStatus:"GET"
 	]
 
     def list() {

@@ -11,6 +11,7 @@ class UrlMappings {
         "500"(view:'/error')
 
         //service
-        "/services"(controller:"service")
+        "/services"(controller:"service", action:"list")
+        "/tables"(controller:"table")
 	}
 }
