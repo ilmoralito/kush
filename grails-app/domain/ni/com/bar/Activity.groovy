@@ -14,6 +14,10 @@ class Activity {
 
     static belongsTo = [table:Table]
 
+    static namedQueries = {
+
+    }
+
     def beforeInsert() {
     	total = service.price * amount
     }

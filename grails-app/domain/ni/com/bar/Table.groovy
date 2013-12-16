@@ -1,5 +1,7 @@
 package ni.com.bar
 
+import org.hibernate.transform.AliasToEntityMapResultTransformer
+
 class Table {
 
 	Integer number
@@ -26,6 +28,22 @@ class Table {
 
             ge "dateCreated", today.clearTime()
             le "dateCreated", today.clearTime() + 1
+        }
+
+        groupedByService { from, to ->
+            ge "dateCreated", from.clearTime()
+            le "dateCreated", to.clearTime()
+            eq "status", true
+
+            activities {
+                projections {
+                    property "service.id", "id"
+                    groupProperty "service", "service"
+                    sum "amount", "count"
+                }
+            }
+
+            resultTransformer(AliasToEntityMapResultTransformer.INSTANCE)
         }
     }
 

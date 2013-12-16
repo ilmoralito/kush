@@ -17,7 +17,9 @@
   		    		<li class="${(controllerName == 'service') ? 'active' : ''}">
   		    			<g:link controller="service">Servicios</g:link>
   		    		</li>
- 		    		<li class=""><g:link action="actionName">Estadisticas</g:link></li>
+ 		    		<li class="${(controllerName == 'stats') ? 'active' : ''}">
+ 		    			<g:link controller="stats">Estadisticas</g:link>
+ 		    		</li>
 		    	</sec:ifAllGranted>
 		    	<li><g:link controller="logout">Salir</g:link></li>
 		    </ul>

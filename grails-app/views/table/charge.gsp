@@ -5,6 +5,10 @@
 	<meta name="layout" content="distraction-free-mode">
 	<title>${activity}</title>
 	<r:require modules="bootstrap, charge"/>
+	<style>
+		details, summary {display: block;}
+		details:not([open]) > :not(summary) {display: none;}
+	</style>
 </head>
 <body>
 	<h3><g:link action="create" params="[number:params?.number]">Meza ${params.number}</g:link></h3>
@@ -14,8 +18,8 @@
 	</g:hasErrors>
 
 	<details>
-		<summary>Servicios a pagar</summary>
-			<g:render template="activities"/>
+		<summary>Actividad de la meza</summary>
+		<g:render template="activities"/>
 	</details>
 
 	<g:form action="charge">
