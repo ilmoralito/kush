@@ -1,5 +1,6 @@
 body { padding-top: 70px; }
 
-details {
-	margin: 5px 0;
+.form-control[disabled] {
+	background: #FFF;
+	cursor: not-allowed;
 }

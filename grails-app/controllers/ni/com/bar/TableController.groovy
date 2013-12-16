@@ -58,7 +58,7 @@ class TableController {
     	[table:table, drinks:Drink.list(), services:services]
     }
 
-    def charge(Integer number) {
+    def charge(ChargeCommand cmd, Integer number) {
         if (request.method == "POST") {
             def table = tableService.tableActive(number)
 
@@ -66,8 +66,12 @@ class TableController {
                 response.sendError 404
             }
 
-            table.payment = params.double("payment")
-            table.change = (params?.change) ? params.double("change") : 0
+            if (!cmd.validate()) {
+                return [cmd:cmd, table:table]
+            }
+
+            table.payment = cmd.payment
+            table.change = cmd.change
             table.status = true
 
             if (!table.save()) {
@@ -93,8 +97,18 @@ class TableController {
         [table:table]
     }
 
-    def handleNumberFormatException(NumberFormatException nfe) {
-        render "Se espera un numero. Dato incorrecto"
-    }
+}
 
+class ChargeCommand {
+    BigDecimal payment
+    BigDecimal money
+    BigDecimal change
+
+    static constraints = {
+        importFrom Table
+
+        money blank:false, validator:{ val, obj ->
+            return val >= obj.payment
+        }
+    }
 }

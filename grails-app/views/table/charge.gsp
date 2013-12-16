@@ -2,32 +2,20 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<meta name="layout" content="distraction-free-mode">
 	<title>${activity}</title>
 	<r:require modules="bootstrap, charge"/>
-	<style>
-		details, summary {display: block;}
-		details:not([open]) > :not(summary) {display: none;}
-	</style>
 </head>
 <body>
-	<h3><g:link action="create" params="[number:params?.number]">Meza ${params.number}</g:link></h3>
-
-	<g:hasErrors bean="${table}">
-		<g:renderErrors bean="${table}"/>
+	<g:hasErrors bean="${cmd}">
+		<p><small><g:renderErrors bean="${cmd}"/></small></p>
 	</g:hasErrors>
 
-	<details>
-		<summary>Actividad de la meza</summary>
-		<g:render template="activities"/>
-	</details>
-
-	<g:form action="charge">
+	<g:form action="charge" autocomplete="off">
 		<g:hiddenField name="number" value="${params?.number}"/>
-
+		<g:hiddenField name="payment" value="${bar.total(table:table)}"/>
 		<div class="form-group">
 			<label for="payment">Pago</label>
-			<g:textField name="payment" value="${bar.total(table:table)}" class="form-control input-lg"/>
+			<g:textField name="payment" value="${bar.total(table:table)}" class="form-control input-lg" disabled="true"/>
 		</div>
 		<div class="form-group">
 			<label for="money">Dinero</label>
