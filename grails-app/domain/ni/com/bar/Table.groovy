@@ -25,7 +25,7 @@ class Table {
             def today = new Date()
 
             ge "dateCreated", today.clearTime()
-            le "dateCreated", today.clearTime()
+            le "dateCreated", today.clearTime() + 1
         }
     }
 
@@ -33,5 +33,5 @@ class Table {
     static hasMany = [activities:Activity]
 
     String toString() { number }
-    
+
 }

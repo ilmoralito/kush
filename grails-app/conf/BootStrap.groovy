@@ -78,6 +78,7 @@ class BootStrap {
         def cigar = new Cigar(brand:"Malvoro", price:25, size:"10").save()
 
         //tables
+        /*
         //#1
         def tableOne1 = new Table(number:1).save()
         def activity1 = new Activity(service:vigoron, amount:2)
@@ -96,8 +97,9 @@ class BootStrap {
         tableOne2.addToActivities(activity4)
         tableOne2.addToActivities(activity5)
 
+
         //#1
-        def tableOne3 = new Table(number:1, status:true, payment:200, change:120).save()
+        def tableOne3 = new Table(number:1, status:true, payment:150, change:30).save()
         def activity6 = new Activity(service:heineken, amount:1)
 
         tableOne3.addToActivities(activity6)
@@ -109,6 +111,7 @@ class BootStrap {
 
         tableFour.addToActivities(activity7)
         tableFour.addToActivities(activity8)
+        */
     }
     def destroy = {
     }

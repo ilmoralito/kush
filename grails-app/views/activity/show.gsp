@@ -8,6 +8,7 @@
 </head>
 <body>
 	<g:set var="number" value="${activity?.table?.number}"/>
+	<g:set var="services" value="${activity.service.class.list()}"/>
 
 	<div class="row">
 		<div class="col-md-12">
@@ -22,11 +23,11 @@
 		<g:hiddenField name="number" value="${number}"/>
 		<div class="form-group">
 			<label for="service">Servicio</label>
-			<g:select from="${activity.service.class.list()}" name="name" value="${activity.service}" class="form-control"/>
+			<g:select from="${services}" optionKey="id" name="service" value="${activity?.service?.id}" class="form-control"/>
 		</div>
 		<div class="form-group">
-			<label for="amount">Servicio</label>
-			<g:textField name="amount" value="${activity.amount}" class="form-control"/>
+			<label for="amount">Cantidad</label>
+			<g:textField name="amount" value="${activity?.amount}" class="form-control"/>
 		</div>
 		<button type="submit" class="btn btn-primary">Actualizar</button>
 		<g:link controller="table" action="create" params="[number:number]" class="btn btn-default pull-right">Regresar</g:link>

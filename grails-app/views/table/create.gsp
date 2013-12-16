@@ -8,31 +8,16 @@
 </head>
 <body>
 	<div class="row">
+		<div class="col-md-12">
+			<g:link action="list" params="[number:params?.number]" class="pull-right">
+				<span class="glyphicon glyphicon-th-list"></span>
+			</g:link>
+		</div>
+	</div>
+
+	<div class="row">
 		<div class="col-md-8">
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>Cantidad y Servicio</th>
-						<th width="1">Total</th>
-					</tr>
-				</thead>
-				<tbody>
-					<g:each in="${table.activities}" var="activity">
-						<tr>
-							<td>
-								<g:link controller="activity" action="show" params="[id:activity.id]">
-									${activity.amount} ${activity.service}
-								</g:link>
-							</td>
-							<td>${activity.total}</td>
-						</tr>
-					</g:each>
-					<tr>
-						<td>TOTAL</td>
-						<td><bar:total table="${table}"/></td>
-					</tr>
-				</tbody>
-			</table>
+			<g:render template="activities"/>
 		</div>
 		<div class="col-md-4">
 			<ul class="nav nav-tabs">
@@ -64,6 +49,11 @@
 
 				<button type="submit" class="btn btn-primary pull-right">Agregar</button>
 			</g:form>
+
+			<g:if test="${table?.activities}">
+				<br><br>
+				<g:link action="charge" params="[number:params?.number]" class="btn btn-warning btn-block btn-lg">Cobrar</g:link>
+			</g:if>
 
 			<div class="row">
 				<div class="col-md-12">

@@ -11,4 +11,10 @@ modules = {
     	dependsOn "app, jquery"
     	resource url:"js/app.js"
     }
+
+    charge {
+        dependsOn "app, jquery"
+        resource url:"js/charge.js"
+    }
+
 }

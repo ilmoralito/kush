@@ -8,13 +8,21 @@ class TableController {
 	static defaultAction = "index"
 	static allowedMethods = [
 		index:"GET",
+        list:"GET",
 		create:["GET", "POST"],
-        delete:"GET"
+        charge:["GET", "POST"],
+        activity:"GET"
 	]
 
 	def tableService
 
     def index() { }
+
+    def list(Integer number) {
+        def tables = Table.todayActivity.findAllByStatusAndNumber(true, number)
+
+        [tables:tables]
+    }
 
     def create() {
     	if (request.method == "POST") {
@@ -35,9 +43,8 @@ class TableController {
 
             flash.message = "Guardado!"
     	}
-        //print params
 
-    	def table = tableService.tableActive(params.int("number"))
+    	def table = (tableService.tableActive(params.int("number"))) ?: new Table(number:params.int("number")).save()
         def services
 
         if (params?.type == 'drink' || !params.type) {
@@ -49,6 +56,45 @@ class TableController {
         }
 
     	[table:table, drinks:Drink.list(), services:services]
+    }
+
+    def charge(Integer number) {
+        if (request.method == "POST") {
+            def table = tableService.tableActive(number)
+
+            if (!table) {
+                response.sendError 404
+            }
+
+            table.payment = params.double("payment")
+            table.change = (params?.change) ? params.double("change") : 0
+            table.status = true
+
+            if (!table.save()) {
+                return [table:table]
+            }
+
+            flash.message = "Confirmado"
+            redirect action:"index"
+        }
+
+        def table = tableService.tableActive(number)
+
+        [table:table]
+    }
+
+    def activity(Long id) {
+        def table = Table.get(id)
+
+        if (!id) {
+            response.sendError 404
+        }
+
+        [table:table]
+    }
+
+    def handleNumberFormatException(NumberFormatException nfe) {
+        render "Se espera un numero. Dato incorrecto"
     }
 
 }

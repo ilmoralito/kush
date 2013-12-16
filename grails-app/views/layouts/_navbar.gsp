@@ -7,7 +7,7 @@
 		   		<span class="icon-bar"></span>
 		   		<span class="icon-bar"></span>
 		   	</button>
-	    	<a class="navbar-brand" href="#">KUSH BAR</a>
+	    	<g:link controller="table" class="navbar-brand">KUSH BAR</g:link>
 		</div>
   		    <ul class="nav navbar-nav navbar-right">
   		    	<li class="${(controllerName == 'table' || controllerName == 'activity') ? 'active' : ''}">
@@ -17,6 +17,7 @@
   		    		<li class="${(controllerName == 'service') ? 'active' : ''}">
   		    			<g:link controller="service">Servicios</g:link>
   		    		</li>
+ 		    		<li class=""><g:link action="actionName">Estadisticas</g:link></li>
 		    	</sec:ifAllGranted>
 		    	<li><g:link controller="logout">Salir</g:link></li>
 		    </ul>

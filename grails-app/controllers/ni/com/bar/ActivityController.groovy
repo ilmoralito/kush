@@ -29,7 +29,8 @@ class ActivityController {
             response.sendError 404
         }
 
-        activity.properties = params
+        activity.service = Service.get(params.int("service"))
+        activity.amount = params.double("amount")
 
         if (!activity.save()) {
         	render view:"show", model:[activity:activity, id:id, number:number]
