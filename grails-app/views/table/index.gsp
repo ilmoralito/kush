@@ -12,22 +12,27 @@
 			<g:set var="st" value="${i + 1}"/>
 
 			<div class="col-md-2">
-				<div class="panel panel-${(bar.check(number:st)) ? 'primary' : 'info'}">
-					<div class="panel-heading">
-						Meza ${st}
-						<g:if test="${ni.com.bar.Table.todayActivity.countByNumberAndStatus(st, true)}">
-							<g:link action="list" params="[number:st]" class="pull-right">
-								<span class="glyphicon glyphicon-th-list" style="color:#444;"></span>
-							</g:link>
-						</g:if>
+				<div class="well well-small well-${(bar.check(number:st)) ? 'primary' : ''}">
+					<div class="row">
+						<div class="col-md-6"><strong>${st}</strong></div>
+						<div class="col-md-6">
+							<g:if test="${ni.com.bar.Table.todayActivity.countByNumberAndStatus(st, true)}">
+								<g:link action="list" params="[number:st]" class="pull-right">
+									<span class="glyphicon glyphicon-th-list"></span>
+								</g:link>
+							</g:if>
+						</div>
 					</div>
-					<div class="panel-body">
-						<g:if test="${bar.check(number:st)}">
-							<g:link action="create" params="[number:st]">Mostrar</g:link>
-						</g:if>
-						<g:else>
-							<g:link action="create" params="[number:st]">Habilitar</g:link>
-						</g:else>
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<g:if test="${bar.check(number:st)}">
+								<g:link action="create" params="[number:st]">Mostrar</g:link>
+							</g:if>
+							<g:else>
+								<g:link action="create" params="[number:st]">Habilitar</g:link>
+							</g:else>
+						</div>
 					</div>
 				</div>
 			</div>

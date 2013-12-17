@@ -8,3 +8,7 @@ body { padding-top: 70px; }
 .well {
 	background: #FEFEFE;
 }
+
+.well-primary {
+	border:1px solid orange;
+}
