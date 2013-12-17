@@ -17,4 +17,15 @@ modules = {
         resource url:"js/charge.js"
     }
 
+    stats {
+        dependsOn "app, jquery"
+        resource url:"js/stats.js"
+    }
+
+    overrides {
+        'jquery-theme' {
+            resource id:'theme', url:'css/custom-theme/jquery-ui-1.10.3.custom.min.css'
+        }
+    }
+
 }

@@ -17,8 +17,11 @@
   		    		<li class="${(controllerName == 'service') ? 'active' : ''}">
   		    			<g:link controller="service">Servicios</g:link>
   		    		</li>
- 		    		<li class="${(controllerName == 'stats') ? 'active' : ''}">
- 		    			<g:link controller="stats">Estadisticas</g:link>
+ 		    		<li class="${(controllerName == 'stats') ? 'active' : ''} dropdown">
+ 		    			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Estadisticas <b class="caret"></b></a>
+ 		    			<ul class="dropdown-menu">
+ 		    				<li><g:link controller="stats">Resultados</g:link></li>
+ 		    			</ul>
  		    		</li>
 		    	</sec:ifAllGranted>
 		    	<li><g:link controller="logout">Salir</g:link></li>

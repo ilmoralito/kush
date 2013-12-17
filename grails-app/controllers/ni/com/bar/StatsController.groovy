@@ -7,7 +7,7 @@ class StatsController {
 
 	static defaultAction = "index"
 	static allowedMethods = [
-		index:"GET"
+		index:["GET", "POST"]
 	]
 
     def index(String from, String to) {
