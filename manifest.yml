@@ -1,0 +1,14 @@
+---
+applications:
+- name: kushbarapp
+  memory: 1G
+  instances: 1
+  host: kushbarapp
+  domain: cfapps.io
+  path: target/kush-0.1.war
+  services:
+    cleardb-d5521:
+      label: cleardb
+      provider: cleardb
+      version: n/a
+      plan: spark

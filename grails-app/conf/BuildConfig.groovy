@@ -40,16 +40,18 @@ grails.project.dependency.resolution = {
         mavenLocal()
         grailsCentral()
         mavenCentral()
-        mavenRepo "http://repo.spring.io/milestone/"
+        //mavenRepo "http://repo.spring.io/milestone/"
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+        mavenRepo "http://maven.springframework.org/milestone/"
     }
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.24'
+        compile "org.cloudfoundry:cloudfoundry-runtime:0.8.4"
     }
 
     plugins {
@@ -73,5 +75,18 @@ grails.project.dependency.resolution = {
         compile ":twitter-bootstrap:3.0.3"
         compile ':webflow:2.0.8.1'
         compile ":jquery-ui:1.10.3"
+        compile ':cloud-foundry:1.2.3'
+    }
+
+    environments {
+      production {
+        dataSource {
+          url = 'jdbc:mysql://localhost/db?useUnicode=true&characterEncoding=utf8'
+          dialect = org.hibernate.dialect.MySQLInnoDBDialect
+          driverClassName = 'com.mysql.jdbc.Driver'
+          username = 'user'
+          password = "password"
+        }
+      }
     }
 }
