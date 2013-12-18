@@ -23,11 +23,23 @@ class Table {
     }
 
     static namedQueries = {
-    	todayActivity {
+    	todayActivities {
             def today = new Date()
 
             ge "dateCreated", today.clearTime()
             le "dateCreated", today.clearTime() + 1
+        }
+
+        active {
+            todayActivities()
+
+            eq "status", false
+        }
+
+        activeByTableNumber { number ->
+            active()
+
+            eq "number", number
         }
 
         groupedByService { from, to ->

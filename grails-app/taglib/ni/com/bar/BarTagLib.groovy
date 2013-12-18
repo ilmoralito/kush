@@ -2,7 +2,8 @@ package ni.com.bar
 
 class BarTagLib {
 
-    static defaultEncodeAs = 'html'
+    static defaultEncodeAs = "html"
+    static encodeAsForTags = [check: "raw"]
     static namespace = "bar"
 
     def tableService
@@ -32,11 +33,13 @@ class BarTagLib {
 		out << total
 	}
 
-	def check = { attrs ->
+	def check = { attrs, body ->
 		Integer number = attrs.int("number")
-		def result = tableService.tableActive(number)
+		def result = Table.todayActivities.findAllByStatusAndNumber(true, number)
 
-		out << result
+		if (result) {
+			out << body()
+		}
 	}
 
 	def totalByTable = { attrs ->

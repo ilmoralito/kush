@@ -5,6 +5,8 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured(['ROLE_ADMIN', 'ROLE_USER'])
 class TableController {
 
+    def tableService
+
 	static defaultAction = "index"
 	static allowedMethods = [
 		index:"GET",
@@ -14,12 +16,46 @@ class TableController {
         activity:"GET"
 	]
 
-	def tableService
+    def index() {
+        [activeTables:Table.active().list()]
+    }
 
-    def index() { }
+    def moveToTable(Long currentTableId, Integer newTableNumber) {
+        if (currentTableId && newTableNumber) {
+            def currentTable = Table.get(currentTableId)
+
+            if (!currentTable) {
+                response.sendError 404
+            }
+
+            def newTable = Table.activeByTableNumber(newTableNumber).get()
+
+            //check if new tables has activities if this condition is true then avoid operation
+            if (newTable?.activities?.size()) {
+                flash.message = "Operacion no permitida. Cancela primero meza $currentTable.number"
+                return [activeTables:Table.active().list()]
+            }
+
+            //check if new tables is allready created if this condition is true then remove new table
+            //and then update current table number
+            if (newTable?.status == false) {
+                newTable.delete()
+            }
+
+            currentTable.properties["number"] = newTableNumber
+
+            if (!currentTable.save()) {
+                currentTable.errors.allErrors.each {
+                    print it
+                }
+            }
+        }
+
+        redirect action:"index"
+    }
 
     def list(Integer number) {
-        def tables = Table.todayActivity.findAllByStatusAndNumber(true, number)
+        def tables = Table.todayActivities.findAllByStatusAndNumber(true, number)
 
         [tables:tables]
     }

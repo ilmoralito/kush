@@ -8,7 +8,7 @@
 </head>
 <body>
 	<g:if test="${total}">
-		<g:if test="check something">
+		<g:if test="${drinks}">
 			<h4>Bebidas</h4>
 			<table class="table table-hover">
 				<g:each in="${drinks}" var="drink">
