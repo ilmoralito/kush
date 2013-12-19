@@ -11,7 +11,7 @@
 		<g:renderErrors bean="${service}"/>
 	</g:hasErrors>
 
-	<g:form action="update">
+	<g:form action="update" autocomplete="off">
 		<g:hiddenField name="id" value="${params?.id}"/>
 		<g:render template="form"/>
 		<g:submitButton name="send" value="Actualizar" class="btn btn-primary"/>

@@ -10,8 +10,8 @@
 	<g:hasErrors bean="${service}">
 		<g:renderErrors bean="${service}"/>
 	</g:hasErrors>
-	
-	<g:form action="create">
+
+	<g:form action="create" autocomplete="off">
 		<g:render template="form"/>
 		<g:submitButton name="send" value="Guardar" class="btn btn-primary"/>
 	</g:form>

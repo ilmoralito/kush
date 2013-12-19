@@ -18,7 +18,7 @@
 		</div>
 	</div>
 
-	<g:form action="update">
+	<g:form action="update" autocomplete="off">
 		<g:hiddenField name="id" value="${activity.id}"/>
 		<g:hiddenField name="number" value="${number}"/>
 		<div class="form-group">

@@ -34,7 +34,7 @@
 
 			<br>
 
-			<g:form action="create">
+			<g:form action="create" autocomplete="off">
 				<g:hiddenField name="type" value="${params?.type}"/>
 				<g:hiddenField name="number" value="${params?.number}"/>
 
