@@ -23,9 +23,9 @@
 					    <li><g:link params="[service:'cigar']">Cigaro</g:link></li>
 					</ul>
 				</div>
-				<g:link action="create" params="[service:'drink']" class="btn btn-primary">Bebida</g:link>
-				<g:link action="create" params="[service:'food']" class="btn btn-primary">Comida</g:link>
-				<g:link action="create" params="[service:'cigar']" class="btn btn-primary">Cigaro</g:link>
+				<g:link action="create" params="[type:'drink']" class="btn btn-primary">Bebida</g:link>
+				<g:link action="create" params="[type:'food']" class="btn btn-primary">Comida</g:link>
+				<g:link action="create" params="[type:'cigar']" class="btn btn-primary">Cigaro</g:link>
 			</div>
 		</div>
 	</div>
