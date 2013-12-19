@@ -4,16 +4,28 @@
 	<meta charset="UTF-8">
 	<meta name="layout" content="main">
 	<title></title>
-	<r:require modules="bootstrap, app"/>
+	<r:require modules="bootstrap, bootstrap-dropdown, app"/>
 </head>
 <body>
-
 	<div class="row">
 		<div class="col-md-12">
 			<div class="pull-right">
-				<g:link action="create" params="[type:'drink']" class="btn btn-primary">Bebida</g:link>
-				<g:link action="create" params="[type:'food']" class="btn btn-primary">Comida</g:link>
-				<g:link action="create" params="[type:'cigar']" class="btn btn-primary">Cigaro</g:link>
+				<div class="btn-group">
+					<button type="button" data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+						<span class="glyphicon glyphicon-filter"></span> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li role="presentation" class="dropdown-header">Filtrar por</li>
+						<li><g:link>Todos</g:link></li>
+						<li class="divider"></li>
+					    <li><g:link params="[service:'drink']">Bebida</g:link></li>
+					    <li><g:link params="[service:'food']">Comida</g:link></li>
+					    <li><g:link params="[service:'cigar']">Cigaro</g:link></li>
+					</ul>
+				</div>
+				<g:link action="create" params="[service:'drink']" class="btn btn-primary">Bebida</g:link>
+				<g:link action="create" params="[service:'food']" class="btn btn-primary">Comida</g:link>
+				<g:link action="create" params="[service:'cigar']" class="btn btn-primary">Cigaro</g:link>
 			</div>
 		</div>
 	</div>
@@ -32,7 +44,7 @@
 				<g:each in="${services}" var="service" status="i">
 					<tr>
 						<td>
-							<g:link action="show" params="[id:service.id, type:service.class.toString().tokenize('.')[3].toLowerCase()]">
+							<g:link action="show" params="[id:service.id, type:service.class.toString().tokenize('.')[3].toLowerCase(), service:params?.service]">
 								${i + 1}
 							</g:link>
 						</td>

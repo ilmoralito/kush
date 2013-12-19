@@ -5,6 +5,8 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured(['ROLE_ADMIN'])
 class ServiceController {
 
+    def serviceService
+
 	static defaultAction = "list"
 	static allowedMethods = [
 		list:"GET",
@@ -14,8 +16,8 @@ class ServiceController {
         changeStatus:"GET"
 	]
 
-    def list() {
-    	def services = Service.list(params)
+    def list(String service) {
+    	def services = serviceService.list(service)
 
     	[services:services]
     }
@@ -95,6 +97,13 @@ class ServiceController {
 		}
 
 		service.status = !service.status
+
+        if (!service.save()) {
+            service.errors.allErrors.each {
+                print it
+            }
+        }
+
 		flash.message = "Estado cambiado"
 
 		redirect action:"list"

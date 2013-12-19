@@ -7,7 +7,7 @@
 				<label for="brand">Marca</label>
 				<g:select from="${service?.constraints?.brand?.inList}" name="brand" value="${service?.brand}" class="form-control"/>
 			</div>
-		
+
 			<div class="form-group">
 				<label for="measure">Medida</label>
 				<g:select from="${service?.constraints?.measure?.inList}" name="measure" value="${service?.measure}" class="form-control"/>

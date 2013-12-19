@@ -15,6 +15,7 @@
 		<g:hiddenField name="id" value="${params?.id}"/>
 		<g:render template="form"/>
 		<g:submitButton name="send" value="Actualizar" class="btn btn-primary"/>
+		<g:link class="btn btn-link" params="[service:(params?.service) ?: '']">Regresar</g:link>
 	</g:form>
 </body>
 </html>
