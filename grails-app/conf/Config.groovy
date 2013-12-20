@@ -89,7 +89,7 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
+        grails.serverURL = "kushbarapp.cfapps.io"
     }
 }
 
