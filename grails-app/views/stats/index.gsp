@@ -14,7 +14,7 @@
 				<g:each in="${drinks}" var="drink">
 					<tr>
 						<td width="1">${drink.count}</td>
-						<td width="150">${drink.service}</td>
+						<td width="160">${drink.service}</td>
 						<td>${drink.service.price * drink.count}</td>
 					</tr>
 				</g:each>
@@ -27,7 +27,7 @@
 				<g:each in="${foods}" var="food">
 					<tr>
 						<td width="1">${food.count}</td>
-						<td width="150">${food.service}</td>
+						<td width="160">${food.service}</td>
 						<td>${food.service.price * food.count}</td>
 					</tr>
 				</g:each>
@@ -40,7 +40,7 @@
 				<g:each in="${cigars}" var="cigar">
 					<tr>
 						<td width="1">${cigar.count}</td>
-						<td width="150">${cigar.service}</td>
+						<td width="160">${cigar.service}</td>
 						<td>${cigar.service.price * cigar.count}</td>
 					</tr>
 				</g:each>

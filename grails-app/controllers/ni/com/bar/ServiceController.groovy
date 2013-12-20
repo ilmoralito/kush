@@ -45,14 +45,14 @@ class ServiceController {
     		}
 
     		flash.message = "Guardado"
+    	}
+
+        if (type == "drink") {
+    		return [service:new Drink(params)]
+    	} else if (type == "food") {
+    		return [service:new Food(params)]
     	} else {
-    		if (type == "drink") {
-    			return [service:new Drink(params)]
-    		} else if (type == "food") {
-    			return [service:new Food(params)]
-    		} else {
-    			return [service:new Cigar(params)]
-    		}
+    		return [service:new Cigar(params)]
     	}
     }
 
@@ -74,14 +74,17 @@ class ServiceController {
 		}
 
 		if (type == "drink") {
-			service.properties["name", "price", "brand", "measure"] = params
+			service.properties["price", "brand", "measure"] = params
 		} else if (type == "food") {
 			service.properties["name", "price", "items"] = params
 		} else {
-			service.properties["name", "price", "brand", "size"] = params
+			service.properties["price", "brand", "size"] = params
 		}
 
 		if (!service.save()) {
+            service.errors.allErrors.each {
+                print it
+            }
 			chain action:"show", model:[service:service], params: [id:id, type:type]
 			return false
 		}
@@ -89,14 +92,14 @@ class ServiceController {
 		redirect action:"show", params:[id:id, type:type]
     }
 
-    def changeStatus(Long id) {
+    def changeStatus(Long id, String type) {
 		def service = Service.get(id)
 
 		if (!service) {
 			response.sendError 404
 		}
 
-		service.status = !service.status
+        service.properties["status"] = !service.status
 
         if (!service.save()) {
             service.errors.allErrors.each {
@@ -106,7 +109,7 @@ class ServiceController {
 
 		flash.message = "Estado cambiado"
 
-		redirect action:"list"
+		redirect action:"list", params:[service:(type) ?: '']
     }
 
 }

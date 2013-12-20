@@ -6,9 +6,9 @@ class Drink extends Service {
 	String measure
 
     static constraints = {
-    	brand blank:false, maxSize:255, inList:["Tona", "Victoria", "Corona", "Heineken"]
+    	brand blank:false, maxSize:255, unique:["measure"], inList:["Tona", "Victoria", "Corona", "Heineken"]
     	measure blank:false, maxSize:255, inList:["12 Onz", "1/2 Litro", "1 Litro"]
     }
 
-    String toString() { "$brand $measure" }
+    String toString() { "$brand de $measure" }
 }

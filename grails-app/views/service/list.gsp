@@ -50,7 +50,7 @@
 						</td>
 						<td>${service}</td>
 						<td>${service.price}</td>
-						<td><g:link action="changeStatus" id="${service.id}"><bar:serviceStatus status="${service?.status}"/></g:link></td>
+						<td><g:link action="changeStatus" params="[id:service.id, type:params?.service]"><bar:serviceStatus status="${service?.status}"/></g:link></td>
 					</tr>
 				</g:each>
 			</tbody>

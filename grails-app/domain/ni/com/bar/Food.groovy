@@ -9,7 +9,7 @@ class Food extends Service{
 	SortedSet items
 
     static constraints = {
-    	name blank:false, unique:true	
+    	name blank:false, unique:true
     }
 
     String toString() { name }
