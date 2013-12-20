@@ -110,7 +110,7 @@ class BootStrap {
                 tableFour.addToActivities(activity8)
             break
             case "production":
-                TimeZone.setDefault(TimeZone.getTimeZone("UTC"))
+                TimeZone.setDefault(TimeZone.getTimeZone("UTC−06:00"))
             break
         }
     }
