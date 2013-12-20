@@ -9,7 +9,7 @@ class Service {
 	Date lastUpdated
 
     static constraints = {
-    	price min:1.0
+    	price blank:false, min:1.0
     }
 
     String toString() { price }
