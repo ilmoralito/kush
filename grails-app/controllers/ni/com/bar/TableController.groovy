@@ -10,14 +10,32 @@ class TableController {
 	static defaultAction = "index"
 	static allowedMethods = [
 		index:"GET",
+        moveToTable:"GET",
         list:"GET",
 		create:["GET", "POST"],
         charge:["GET", "POST"],
-        activity:"GET"
+        activity:"GET",
+        delete:"GET"
 	]
 
     def index() {
         [activeTables:Table.active().list()]
+    }
+
+    def delete(Integer number) {
+        def table = Table.activeByTableNumber(number).get()
+
+        if (!table) {
+            response.sendError 404
+        }
+
+        if (table.activities) {
+            flash.message = "Accion no permitida. Meza con servcios"
+        } else {
+            table.delete()
+        }
+
+        redirect action:"index"
     }
 
     def moveToTable(Long currentTableId, Integer newTableNumber) {

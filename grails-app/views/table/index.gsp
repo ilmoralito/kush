@@ -29,6 +29,10 @@
 											<li><g:link action="list" params="[number:number]">Listar</g:link></li>
 											<li role="presentation" class="divider"></li>
 										</bar:check>
+										<bar:showDisabledTableLink number="${number}">
+											<li><g:link action="delete" params="[number:number]">Deshabilitar</g:link></li>
+											<li class="divider"></li>
+										</bar:showDisabledTableLink>
 	  									<li role="presentation" class="dropdown-header">Mover</li>
 									    <g:each in="${1..tables}" var="n">
 									    	<!--

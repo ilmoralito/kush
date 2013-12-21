@@ -3,7 +3,7 @@ package ni.com.bar
 class BarTagLib {
 
     static defaultEncodeAs = "html"
-    static encodeAsForTags = [check: "raw"]
+    static encodeAsForTags = [check: "raw", showDisabledTableLink:"raw"]
     static namespace = "bar"
 
     def tableService
@@ -38,6 +38,15 @@ class BarTagLib {
 		def result = Table.todayActivities.findAllByStatusAndNumber(true, number)
 
 		if (result) {
+			out << body()
+		}
+	}
+
+	def showDisabledTableLink = { attrs, body ->
+		Integer number = attrs.int("number")
+		def result = Table.activeByTableNumber(number).get()
+
+		if (!result?.activities?.size()) {
 			out << body()
 		}
 	}
