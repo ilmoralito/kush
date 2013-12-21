@@ -73,20 +73,20 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.5"
         compile ":spring-security-core:2.0-RC2"
         compile ":twitter-bootstrap:3.0.3"
-        compile ':webflow:2.0.8.1'
         compile ":jquery-ui:1.10.3"
         compile ':cloud-foundry:1.2.3'
     }
 
     environments {
-      production {
-        dataSource {
-          url = 'jdbc:mysql://localhost/db?useUnicode=true&characterEncoding=utf8'
-          dialect = org.hibernate.dialect.MySQLInnoDBDialect
-          driverClassName = 'com.mysql.jdbc.Driver'
-          username = 'user'
-          password = "password"
+        production {
+            dataSource {
+                dbCreate = "update"
+                url = 'jdbc:mysql://localhost/db?useUnicode=true&characterEncoding=utf8'
+                dialect = org.hibernate.dialect.MySQLInnoDBDialect
+                driverClassName = 'com.mysql.jdbc.Driver'
+                username = 'user'
+                password = "password"
+            }
         }
-      }
     }
 }
