@@ -22,6 +22,11 @@ modules = {
         resource url:"js/stats.js"
     }
 
+    offline {
+        dependsOn "app"
+        resource url:"js/offline.js"
+    }
+
     overrides {
         'jquery-theme' {
             resource id:'theme', url:'css/custom-theme/jquery-ui-1.10.3.custom.min.css'

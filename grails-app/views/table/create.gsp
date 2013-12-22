@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="layout" content="main">
 	<title>Actividad</title>
-	<r:require modules="bootstrap, app"/>
+	<r:require modules="bootstrap, offline"/>
 </head>
 <body>
 	<div class="row">
@@ -47,7 +47,7 @@
 					<g:textField name="amount" class="form-control"/>
 				</div>
 
-				<button type="submit" class="btn btn-primary pull-right">Agregar</button>
+				<button type="submit" id="createServiceForm" class="btn btn-primary pull-right">Agregar</button>
 			</g:form>
 
 			<g:if test="${table?.activities}">

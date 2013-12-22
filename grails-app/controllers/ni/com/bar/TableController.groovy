@@ -19,7 +19,7 @@ class TableController {
 	]
 
     def index() {
-        [activeTables:Table.active().list()]
+        [activeTables:Table.active().list(params)]
     }
 
     def delete(Integer number) {
