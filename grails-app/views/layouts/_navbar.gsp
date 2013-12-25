@@ -20,7 +20,8 @@
  		    		<li class="${(controllerName == 'stats') ? 'active' : ''} dropdown">
  		    			<a href="#" class="dropdown-toggle" data-toggle="dropdown">Estadisticas <b class="caret"></b></a>
  		    			<ul class="dropdown-menu">
- 		    				<li><g:link controller="stats">Resultados</g:link></li>
+ 		    				<li><g:link controller="stats">Por servicios</g:link></li>
+ 		    				<li><g:link controller="stats" action="byTables">Por mezas</g:link></li>
  		    			</ul>
  		    		</li>
 		    	</sec:ifAllGranted>

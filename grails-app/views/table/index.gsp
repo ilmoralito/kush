@@ -19,29 +19,34 @@
 	</div>
 	<br>
 	<g:if test="${params?.view}">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th width="1">#</th>
-					<th width="1">Saldo</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<g:each in="${activeTables}" var="table" status="i">
-					<g:set var="number" value="${table.number}"/>
-					<g:if test="${table?.activities}">
-						<tr>
-							<td><g:link action="create" params="[number:number]">${number}</g:link></td>
-							<td><bar:total table="${table}"/></td>
-							<td>
-								<g:link action="charge" params="[number:number]">Cobrar</g:link>
-							</td>
-						</tr>
-					</g:if>
-				</g:each>
-			</tbody>
-		</table>
+		<g:if test="${activeTables}">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th width="1">#</th>
+						<th width="1">Saldo</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<g:each in="${activeTables}" var="table" status="i">
+						<g:set var="number" value="${table.number}"/>
+						<g:if test="${table?.activities}">
+							<tr>
+								<td><g:link action="create" params="[number:number]">${number}</g:link></td>
+								<td><bar:total table="${table}"/></td>
+								<td>
+									<g:link action="charge" params="[number:number]">Cobrar</g:link>
+								</td>
+							</tr>
+						</g:if>
+					</g:each>
+				</tbody>
+			</table>
+		</g:if>
+		<g:else>
+			<h1>...</h1>
+		</g:else>
 	</g:if>
 	<g:else>
 		<div class="row">

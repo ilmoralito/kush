@@ -7,13 +7,13 @@ class StatsController {
 
 	static defaultAction = "index"
 	static allowedMethods = [
-		index:["GET", "POST"]
+		index:["GET", "POST"],
+        byTables:["GET", "POST"]
 	]
 
     def index(String from, String to) {
-    	def fromDate = (from) ? new Date().parse("yyyy-MM-dd", from) : new Date()
-    	def toDate = (to) ? new Date().parse("yyyy-MM-dd", to) : new Date() + 1
-    	def results = Table.groupedByService(fromDate, toDate).list()
+    	def dates = validateDates(from, to)
+    	def results = Table.dateCreatedFromTo(dates.fromDate, dates.toDate).groupedByService.list()
 
     	List drinks = []
     	List foods = []
@@ -68,6 +68,20 @@ class StatsController {
     		cigarsTotal:cigarsTotal,
     		total:total
     	]
+    }
+
+    def byTables(String from, String to) {
+        def dates = validateDates(from, to)
+        def results = Table.dateCreatedFromTo(dates.fromDate, dates.toDate).groupedByTable().list()
+
+        [results:results]
+    }
+
+    private validateDates(String from, String to) {
+        def fromDate = (from) ? new Date().parse("yyyy-MM-dd", from) : new Date()
+        def toDate = (to) ? new Date().parse("yyyy-MM-dd", to) : new Date() + 1
+
+        [fromDate:fromDate, toDate:toDate]
     }
 
 }

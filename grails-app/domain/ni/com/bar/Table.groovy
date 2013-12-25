@@ -42,9 +42,12 @@ class Table {
             eq "number", number
         }
 
-        groupedByService { from, to ->
+        dateCreatedFromTo { from, to ->
             ge "dateCreated", from.clearTime()
             le "dateCreated", to.clearTime()
+        }
+
+        groupedByService {
             eq "status", true
 
             activities {
@@ -54,6 +57,20 @@ class Table {
                     sum "amount", "count"
                 }
             }
+
+            resultTransformer(AliasToEntityMapResultTransformer.INSTANCE)
+        }
+
+        groupedByTable {
+            eq "status", true
+
+            projections {
+                groupProperty "number", "number"
+                count "number", "count"
+                sum "payment", "payment"
+            }
+
+            order "count", "desc"
 
             resultTransformer(AliasToEntityMapResultTransformer.INSTANCE)
         }
