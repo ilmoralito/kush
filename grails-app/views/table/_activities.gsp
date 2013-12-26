@@ -22,13 +22,29 @@
 					<td>${activity.total}</td>
 				</tr>
 			</g:each>
-			<tr>
-				<td>TOTAL</td>
-				<td><bar:total table="${table}"/></td>
-			</tr>
+			<g:if test="${table?.fees}">
+				<tr>
+					<td><strong>Total consumido</strong></td>
+					<td><strong><bar:totalActivities table="${table}"/></strong></td>
+				</tr>
+				<tr>
+					<td><strong>Total abonado</strong></td>
+					<td><strong><bar:totalFees table="${table}"/></strong></td>
+				</tr>
+				<tr>
+					<td>TOTAL</td>
+					<td><bar:totalPayment table="${table}"/></td>
+				</tr>
+			</g:if>
+			<g:else>
+				<tr>
+					<td>TOTAL</td>
+					<td><bar:totalActivities table="${table}"/></td>
+				</tr>
+			</g:else>
 		</tbody>
 	</table>
 </g:if>
 <g:else>
-	...
+	<h1>...</h1>
 </g:else>

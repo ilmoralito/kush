@@ -74,10 +74,12 @@ class Table {
 
             resultTransformer(AliasToEntityMapResultTransformer.INSTANCE)
         }
+
     }
 
     List activities
-    static hasMany = [activities:Activity]
+    List fees
+    static hasMany = [activities:Activity, fees:Fee]
 
     String toString() { number }
 

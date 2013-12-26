@@ -1,25 +1,16 @@
-$("#money").on("keyup", function(){
-	var money = $(this).val(),
-		payment = $("#payment").val(),
-		change = $("#change");
+var payment = parseFloat(document.querySelector("#payment").value),
+	change = document.querySelector("#change"),
+	no_change = document.querySelector("#no_change"),
+	money = document.querySelector("#money");
 
-		change.val(money - payment)
+money.addEventListener("keyup", function(){
+	var _this = parseFloat(this.value);
+
+	if (payment > _this) {
+		change.value = payment - _this;
+		no_change.value = payment - _this;
+	} else {
+		change.value = _this - payment;
+		no_change.value = _this - payment;
+	}
 })
-
-if (!("open" in document.createElement("details"))) {
- 
-var summaries = document.querySelectorAll("details > summary");
- 
-for (var i = 0; i < summaries.length; i++) {
-var summary = summaries[i];
-summary.addEventListener("click", function() {
-var parent = summary.parentNode;
-if (parent.hasAttribute("open")) {
-parent.removeAttribute("open");
-} else {
-parent.setAttribute("open", "open");
-}
-}, false);
-}
- 
-}

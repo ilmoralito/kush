@@ -75,12 +75,8 @@
 											</bar:showDisabledTableLink>
 		  									<li role="presentation" class="dropdown-header">Mover</li>
 										    <g:each in="${1..tables}" var="n">
-										    	<!--
-										    		show only if
-										    		1. table is diferente than the choosing one
-										    		2. if destiny table do not has activities
-										    	-->
-										    	<g:if test="${n != number && !ni.com.bar.Table.todayActivities.findByNumberAndStatus(n, false)?.activities?.size()}">
+										    	<!--show only if table is diferente than the choosing one-->
+										    	<g:if test="${n != number}">
 										    		<li><g:link action="moveToTable" params="[currentTableId:tableInstance.id, newTableNumber:n]">${n}</g:link></li>
 										    	</g:if>
 										    </g:each>

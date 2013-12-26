@@ -14,14 +14,8 @@
 		<g:render template="/layouts/table/sub-menu"/>
 
 		<div class="row">
-			<div class="col-md-4 col-md-offset-2">
-				<g:render template="activities"/>
-			</div>
-			<div class="col-md-4">
+			<div class="col-md-8 col-md-offset-2">
 				<g:layoutBody/>
-				<g:if test="${flash.message}">
-					<h4>${flash.message}</h4>
-				</g:if>
 			</div>
 		</div>
 	</div>

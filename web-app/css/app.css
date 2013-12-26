@@ -20,3 +20,7 @@ body {
 	border-radius: 0;
 	border:0;
 }
+
+.nav-tabs {
+	border-bottom: 2px solid #FFF;
+}

@@ -74,6 +74,7 @@ class BootStrap {
                 //cigar
                 def cigar = new Cigar(brand:"Malvoro", price:25, size:"10").save()
 
+                /*
                 //tables
 
                 //#1
@@ -108,6 +109,7 @@ class BootStrap {
 
                 tableFour.addToActivities(activity7)
                 tableFour.addToActivities(activity8)
+                */
             break
             case "production":
                 TimeZone.setDefault(TimeZone.getTimeZone("UTC−06:00"))

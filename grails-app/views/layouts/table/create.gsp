@@ -11,16 +11,15 @@
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-11">
-				<strong>&nbsp;&nbsp;#${params?.number}</strong>
-			</div>
-			<div class="col-md-1">
-				<g:link action="list" params="[number:params?.number]" class="pull-right">
-					<span class="glyphicon glyphicon-th-list"></span>
-				</g:link>
+			<div class="col-md-12">
+				<div class="btn-group pull-right">
+					<g:link action="actionName" class="btn btn-default">1</g:link>
+					<g:link action="actionName" class="btn btn-warning">2</g:link>
+					<g:link action="list" params="[number:params?.number]" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></g:link>
+				</div>
 			</div>
 		</div>
-
+		<br>
 		<div class="row">
 			<div class="col-md-8">
 				<g:layoutBody/>
@@ -49,7 +48,7 @@
 
 					<div class="form-group">
 						<label for="service">Servicio</label>
-						<g:select from="${services}" optionKey="id" name="service" class="form-control" autofocus="true"/>
+						<g:select from="${services}" optionKey="id" name="service" class="form-control"/>
 					</div>
 					<div class="form-group">
 						<label for="amount">Cantidad</label>

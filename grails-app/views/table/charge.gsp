@@ -12,18 +12,20 @@
 
 	<g:form action="charge" autocomplete="off">
 		<g:hiddenField name="number" value="${params?.number}"/>
-		<g:hiddenField name="payment" value="${bar.total(table:table)}"/>
+		<g:hiddenField name="payment" value="${total}"/>
+		<g:hiddenField name="change"/>
+
 		<div class="form-group">
 			<label for="payment">Pago</label>
-			<g:textField name="payment" value="${bar.total(table:table)}" class="form-control input-lg" disabled="true"/>
+			<g:textField name="payment" value="${total}" class="form-control input-lg" disabled="true"/>
 		</div>
 		<div class="form-group">
 			<label for="money">Dinero</label>
-			<g:textField name="money" value="${params?.money}" class="form-control input-lg" autofocus="true"/>
+			<g:textField name="money" value="${cmd?.money}" class="form-control input-lg" autofocus="true"/>
 		</div>
 		<div class="form-group">
-			<label for="change">Vuelto</label>
-			<g:textField name="change" value="${params?.change}" class="form-control input-lg"/>
+			<label for="no_change">Resto o Cambio</label>
+			<g:textField name="no_change" value="${cmd?.change}" class="form-control input-lg" disabled="true"/>
 		</div>
 		<button type="submit" class="btn btn-warning btn-lg btn-block">Confirmar</button>
 	</g:form>

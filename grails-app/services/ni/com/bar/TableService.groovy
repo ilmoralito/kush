@@ -14,4 +14,38 @@ class TableService {
 
 		return table
     }
+
+    def totalActivities(Table table) {
+        def activitiesCriteria = Table.createCriteria()
+        def totalActivities = activitiesCriteria.get() {
+            eq "id", table.id
+
+            projections {
+                activities {
+                    sum "total"
+                }
+            }
+        }
+
+        return totalActivities
+    }
+
+    def totalFees(Table table) {
+        def feesCriteria = Fee.createCriteria()
+        def totalFees = feesCriteria.get() {
+            eq "table", table
+
+            projections {
+                sum "fee"
+            }
+        }
+
+        return totalFees
+    }
+
+    def calcTotalPayment(Table table) {
+        def total = totalActivities(table) - (totalFees(table) ?: 0)
+
+        return total
+    }
 }

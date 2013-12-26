@@ -16,21 +16,22 @@ class BarTagLib {
 		}
 	}
 
-	def total = { attrs ->
-		def id = attrs.table.id
+	def totalActivities = { attrs ->
+		def table = attrs.table
 
-		def criteria = Table.createCriteria()
-		def total = criteria.get() {
-			eq "id", id
+		out << tableService.totalActivities(table)
+	}
 
-			projections {
-				activities {
-					sum "total"
-				}
-			}
-		}
+	def totalFees = { attrs ->
+		def table = attrs.table
 
-		out << total
+		out << tableService.totalFees(table)
+	}
+
+	def totalPayment = { attrs ->
+		def table = attrs.table
+
+		out << tableService.calcTotalPayment(table)
 	}
 
 	def check = { attrs, body ->

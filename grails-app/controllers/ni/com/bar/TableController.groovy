@@ -48,16 +48,13 @@ class TableController {
 
             def newTable = Table.activeByTableNumber(newTableNumber).get()
 
-            //check if new tables has activities if this condition is true then avoid operation
-            if (newTable?.activities?.size()) {
-                flash.message = "Operacion no permitida. Cancela primero meza $currentTable.number"
-                return [activeTables:Table.active().list()]
-            }
-
-            //check if new tables is allready created if this condition is true then remove new table
-            //and then update current table number
-            if (newTable?.status == false) {
+            if (!newTable) {
+                currentTable.properties["number"] = newTableNumber
+            } else if (newTable && !newTable?.activities) {
                 newTable.delete()
+            } else if (newTable && newTable.activities) {
+                currentTable.addToTables(newTable.id)
+                //newTable.properties["number"]
             }
 
             currentTable.properties["number"] = newTableNumber
@@ -113,32 +110,45 @@ class TableController {
     }
 
     def charge(ChargeCommand cmd, Integer number) {
+        def table = tableService.tableActive(number)
+
+        if (!table) {
+            response.sendError 404
+        }
+
         if (request.method == "POST") {
-            def table = tableService.tableActive(number)
-
-            if (!table) {
-                response.sendError 404
-            }
-
             if (!cmd.validate()) {
-                return [cmd:cmd, table:table]
+                chain action:"charge", model:[table:table, cmd:cmd], params:[number:number]
+                return
             }
 
-            table.payment = cmd.payment
-            table.change = cmd.change
-            table.status = true
-
-            if (!table.save()) {
-                return [table:table]
+            if (cmd.money < cmd.payment) {
+                table.addToFees(new Fee(fee:cmd.money))
+            } else {
+                table.payment = tableService.totalActivities(table)
+                table.change = cmd.change
+                table.status = true
             }
+
+            table.save()
 
             flash.message = "Confirmado"
             redirect action:"index"
         }
 
-        def table = tableService.tableActive(number)
+        def total = tableService.calcTotalPayment(table)
 
-        [table:table]
+        [table:table, total:total]
+    }
+
+    def fees(Long id) {
+        def table = Table.get(id)
+
+        if (!table) {
+            response.sendError 404
+        }
+
+        [fees:table?.fees]
     }
 
     def activity(Long id) {
@@ -161,8 +171,6 @@ class ChargeCommand {
     static constraints = {
         importFrom Table
 
-        money blank:false, validator:{ val, obj ->
-            return val >= obj.payment
-        }
+        money blank:false, min:1.0
     }
 }
