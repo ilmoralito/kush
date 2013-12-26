@@ -16,16 +16,18 @@
 					</button>
 					<ul class="dropdown-menu">
 						<li role="presentation" class="dropdown-header">Filtrar por</li>
-						<li><g:link>Todos</g:link></li>
-						<li class="divider"></li>
 					    <li><g:link params="[service:'drink']">Bebida</g:link></li>
-					    <li><g:link params="[service:'food']">Comida</g:link></li>
 					    <li><g:link params="[service:'cigar']">Cigaro</g:link></li>
+					    <li><g:link params="[service:'food']">Comida</g:link></li>
+					    <li><g:link params="[service:'localDrink']">Bebida local</g:link></li>
+						<li class="divider"></li>
+						<li><g:link>Todos</g:link></li>
 					</ul>
 				</div>
 				<g:link action="create" params="[type:'drink']" class="btn btn-primary">Bebida</g:link>
-				<g:link action="create" params="[type:'food']" class="btn btn-primary">Comida</g:link>
 				<g:link action="create" params="[type:'cigar']" class="btn btn-primary">Cigaro</g:link>
+				<g:link action="create" params="[type:'food']" class="btn btn-primary">Comida</g:link>
+				<g:link action="create" params="[type:'localDrink']" class="btn btn-primary">Bebida local</g:link>
 			</div>
 		</div>
 	</div>
@@ -44,7 +46,7 @@
 				<g:each in="${services}" var="service" status="i">
 					<tr>
 						<td>
-							<g:link action="show" params="[id:service.id, type:service.class.toString().tokenize('.')[3].toLowerCase(), service:params?.service]">
+							<g:link action="show" params="[id:service.id, type:(service instanceof ni.com.bar.LocalDrink) ? 'localDrink' : service.class.toString().tokenize('.')[3].toLowerCase(), service:params?.service]">
 								${i + 1}
 							</g:link>
 						</td>

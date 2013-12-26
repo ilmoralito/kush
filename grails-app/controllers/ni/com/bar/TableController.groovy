@@ -76,7 +76,7 @@ class TableController {
     }
 
     def create() {
-    	if (request.method == "POST") {
+        if (request.method == "POST") {
             def table = tableService.tableActive(params.int("number"))
 
             if (!table) {
@@ -102,8 +102,10 @@ class TableController {
             services = Drink.findAllByStatus(true)
         } else if (params?.type == 'food') {
             services = Food.findAllByStatus(true)
-        } else {
+        } else if (params?.type == "cigar") {
             services = Cigar.findAllByStatus(true)
+        } else {
+            services = LocalDrink.findAllByStatus(true)
         }
 
     	[table:table, drinks:Drink.list(), services:services]

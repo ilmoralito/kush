@@ -47,6 +47,11 @@
 							<div class="col-md-6">Total cigarros</div>
 							<div class="col-md-6">${cigarsTotal}</div>
 						</div>
+						<br>
+						<div class="row">
+							<div class="col-md-6">Total bebidas locales</div>
+							<div class="col-md-6">${localDrinksTotal}</div>
+						</div>
 						<hr>
 						<div class="row">
 							<div class="col-md-6">TOTAL</div>

@@ -36,13 +36,19 @@ class ServiceController {
     			if (!food.save()) {
     				return [service:food, type:type]
     			}
-    		} else {
+    		} else if (type == "cigar") {
     			def cigar = new Cigar(params)
 
     			if (!cigar.save()) {
     				return [service:cigar, type:type]
     			}
-    		}
+    		} else {
+                def localDrink = new LocalDrink(params)
+
+                if (!localDrink.save()) {
+                    return [service:localDrink, type:type]
+                }
+            }
 
     		flash.message = "Guardado"
     	}
@@ -51,9 +57,11 @@ class ServiceController {
     		return [service:new Drink(params)]
     	} else if (type == "food") {
     		return [service:new Food(params)]
-    	} else {
+    	} else if (type == "cigar") {
     		return [service:new Cigar(params)]
-    	}
+    	} else {
+            return [service:new LocalDrink(params)]
+        }
     }
 
     def show(Long id, String type) {
@@ -77,14 +85,13 @@ class ServiceController {
 			service.properties["price", "brand", "measure"] = params
 		} else if (type == "food") {
 			service.properties["name", "price", "items"] = params
-		} else {
+		} else if (type == "cigar") {
 			service.properties["price", "brand", "size"] = params
-		}
+		} else {
+            service.properties["name", "price"] = params
+        }
 
 		if (!service.save()) {
-            service.errors.allErrors.each {
-                print it
-            }
 			chain action:"show", model:[service:service], params: [id:id, type:type]
 			return false
 		}

@@ -16,6 +16,9 @@ class ServiceService {
     		case "cigar":
     			return Cigar.list()
     		break
+            case "localDrink":
+                return LocalDrink.list()
+            break
     		default:
     			return Service.list()
     	}

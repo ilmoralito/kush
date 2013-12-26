@@ -32,31 +32,39 @@
 				  	<li class="${(params.type == 'drink' || !params.type) ? "active" : ''}">
 				  		<g:link controller="table" action="create" params="[number:params?.number, type:'drink']">Bebida</g:link>
 				  	</li>
+					<li class="${(params.type == 'cigar') ? "active" : ''}">
+						<g:link controller="table" action="create" params="[number:params?.number, type:'cigar']">Cigaro</g:link>
+					</li>
 					<li class="${(params.type == 'food') ? "active" : ''}">
 						<g:link controller="table" action="create" params="[number:params?.number, type:'food']">Comida</g:link>
 					</li>
-					<li class="${(params.type == 'cigar') ? "active" : ''}">
-						<g:link controller="table" action="create" params="[number:params?.number, type:'cigar']">Cigaro</g:link>
+					<li class="${(params.type == 'localDrink') ? "active" : ''}">
+						<g:link controller="table" action="create" params="[number:params?.number, type:'localDrink']">Bebida local</g:link>
 					</li>
 				</ul>
 
 				<br>
 
-				<g:form action="create" autocomplete="off">
-					<g:hiddenField name="type" value="${params?.type}"/>
-					<g:hiddenField name="number" value="${params?.number}"/>
+				<g:if test="${services}">
+					<g:form action="create" autocomplete="off">
+						<g:hiddenField name="type" value="${params?.type}"/>
+						<g:hiddenField name="number" value="${params?.number}"/>
 
-					<div class="form-group">
-						<label for="service">Servicio</label>
-						<g:select from="${services}" optionKey="id" name="service" class="form-control"/>
-					</div>
-					<div class="form-group">
-						<label for="amount">Cantidad</label>
-						<g:textField name="amount" class="form-control"/>
-					</div>
+						<div class="form-group">
+							<label for="service">Servicio</label>
+							<g:select from="${services}" optionKey="id" name="service" class="form-control"/>
+						</div>
+						<div class="form-group">
+							<label for="amount">Cantidad</label>
+							<g:textField name="amount" class="form-control"/>
+						</div>
 
-					<button type="submit" id="createServiceForm" class="btn btn-primary pull-right">Agregar</button>
-				</g:form>
+						<button type="submit" id="createServiceForm" class="btn btn-primary pull-right">Agregar</button>
+					</g:form>
+				</g:if>
+				<g:else>
+					<g:link controller="service" class="btn btn-primary">Habilitar o crear servicio</g:link>
+				</g:else>
 
 				<g:if test="${table?.activities}">
 					<br><br>

@@ -72,44 +72,7 @@ class BootStrap {
                 }
 
                 //cigar
-                def cigar = new Cigar(brand:"Malvoro", price:25, size:"10").save()
-
-                /*
-                //tables
-
-                //#1
-                def tableOne1 = new Table(number:1).save()
-                def activity1 = new Activity(service:vigoron, amount:2)
-                def activity2 = new Activity(service:heineken, amount:3)
-                def activity3 = new Activity(service:heineken, amount:6)
-
-                tableOne1.addToActivities(activity1)
-                tableOne1.addToActivities(activity2)
-                tableOne1.addToActivities(activity3)
-
-                //#1
-                def tableOne2 = new Table(number:1, status:true, payment:700, change:20).save()
-                def activity4 = new Activity(service:tostones, amount:1)
-                def activity5 = new Activity(service:heineken, amount:5)
-
-                tableOne2.addToActivities(activity4)
-                tableOne2.addToActivities(activity5)
-
-
-                //#1
-                def tableOne3 = new Table(number:1, status:true, payment:150, change:30).save()
-                def activity6 = new Activity(service:heineken, amount:1)
-
-                tableOne3.addToActivities(activity6)
-
-                //#4
-                def tableFour = new Table(number:4).save()
-                def activity7 = new Activity(service:tostones, amount:1)
-                def activity8 = new Activity(service:heineken, amount:10)
-
-                tableFour.addToActivities(activity7)
-                tableFour.addToActivities(activity8)
-                */
+                def cigar = new Cigar(brand:"Belmont", price:25, size:"10").save()
             break
             case "production":
                 TimeZone.setDefault(TimeZone.getTimeZone("UTC−06:00"))

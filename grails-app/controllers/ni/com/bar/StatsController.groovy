@@ -16,8 +16,9 @@ class StatsController {
     	def results = Table.dateCreatedFromTo(dates.fromDate, dates.toDate).groupedByService.list()
 
     	List drinks = []
+        List cigars = []
     	List foods = []
-    	List cigars = []
+        List localDrinks = []
 
     	results.each { result ->
     		def service = Service.get(result.id)
@@ -26,13 +27,17 @@ class StatsController {
     			drinks << result
     		}
 
+            if (service instanceof ni.com.bar.Cigar) {
+                cigars << result
+            }
+
     		if (service instanceof ni.com.bar.Food) {
     			foods << result
     		}
 
-    		if (service instanceof ni.com.bar.Cigar) {
-    			cigars << result
-    		}
+            if (service instanceof ni.com.bar.LocalDrink) {
+                localDrinks << result
+            }
     	}
 
     	//drinks total
@@ -46,6 +51,12 @@ class StatsController {
     	foods.each { food ->
     		foodsTotal = foodsTotal + (food.service.price * food.count)
     	}
+
+        //localDrinks total
+        def localDrinksTotal = 0
+        localDrinks.each { localDrink ->
+            localDrinksTotal = localDrinksTotal + (localDrink.service.price * localDrink.count)
+        }
 
     	//cigar
     	def cigarsTotal = 0
@@ -66,6 +77,8 @@ class StatsController {
     		foodsTotal:foodsTotal,
     		cigars:cigars,
     		cigarsTotal:cigarsTotal,
+            localDrinks:localDrinks,
+            localDrinksTotal:localDrinksTotal,
     		total:total
     	]
     }

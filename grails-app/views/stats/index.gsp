@@ -34,6 +34,19 @@
 			</table>
 		</g:if>
 
+		<g:if test="${localDrinks}">
+			<h4>Bebidas locales</h4>
+			<table class="table table-hover">
+				<g:each in="${localDrinks}" var="localDrink">
+					<tr>
+						<td width="1">${localDrink.count}</td>
+						<td width="160">${localDrink.service}</td>
+						<td>${localDrink.service.price * localDrink.count}</td>
+					</tr>
+				</g:each>
+			</table>
+		</g:if>
+
 		<g:if test="${cigars}">
 			<h4>Cigarros</h4>
 			<table class="table table-hover">
