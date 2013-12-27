@@ -132,4 +132,4 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/dbconsole/**':                  ['permitAll']
 ]
 
-ni.com.bar.tables = 16
+ni.com.bar.tables = 23
