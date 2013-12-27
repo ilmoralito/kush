@@ -6,6 +6,9 @@ class Activity {
 	Integer amount
 	BigDecimal total
 
+    Date dateCreated
+    Date lastUpdated
+
     static constraints = {
     	service blank:false
     	amount min:1, blank:false

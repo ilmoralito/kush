@@ -46,23 +46,18 @@ class TableController {
                 response.sendError 404
             }
 
-            def newTable = Table.activeByTableNumber(newTableNumber).get()
+            def newTable = (Table.activeByTableNumber(newTableNumber).get()) ?: new Table(number:newTableNumber)
 
-            if (!newTable) {
-                currentTable.properties["number"] = newTableNumber
-            } else if (newTable && !newTable?.activities) {
-                newTable.delete()
-            } else if (newTable && newTable.activities) {
-                currentTable.addToTables(newTable.id)
-                //newTable.properties["number"]
+            if (currentTable?.activities) {
+                for(activity in currentTable.activities) {
+                    newTable.addToActivities(service:activity.service, amount:activity.amount, total:activity.service.price * activity.amount)
+                }
             }
 
-            currentTable.properties["number"] = newTableNumber
+            currentTable.delete()
 
-            if (!currentTable.save()) {
-                currentTable.errors.allErrors.each {
-                    print it
-                }
+            if (!newTable.save()) {
+                flash.message = "Algo salio mal. Porfavor intenta otravez"
             }
         }
 

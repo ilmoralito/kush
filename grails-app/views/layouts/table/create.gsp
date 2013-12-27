@@ -13,9 +13,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="btn-group pull-right">
-					<g:link action="actionName" class="btn btn-default">1</g:link>
-					<g:link action="actionName" class="btn btn-warning">2</g:link>
-					<g:link action="list" params="[number:params?.number]" class="btn btn-default"><span class="glyphicon glyphicon-th-list"></span></g:link>
+					<g:link action="list" params="[number:params?.number]"><span class="glyphicon glyphicon-th-list"></span></g:link>
 				</div>
 			</div>
 		</div>
