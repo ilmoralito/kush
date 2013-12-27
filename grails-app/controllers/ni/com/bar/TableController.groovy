@@ -50,7 +50,7 @@ class TableController {
 
             if (currentTable?.activities) {
                 for(activity in currentTable.activities) {
-                    newTable.addToActivities(service:activity.service, amount:activity.amount, total:activity.service.price * activity.amount)
+                    newTable.addToActivities(service:activity.service, amount:activity.amount, total:activity.service.price * activity.amount, flag:currentTable.number)
                 }
             }
 

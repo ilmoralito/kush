@@ -2,9 +2,11 @@ package ni.com.bar
 
 class Activity {
 
-	Service service
-	Integer amount
-	BigDecimal total
+    Service service
+    Integer amount
+    BigDecimal total
+
+    Integer flag
 
     Date dateCreated
     Date lastUpdated
@@ -13,6 +15,8 @@ class Activity {
     	service blank:false
     	amount min:1, blank:false
     	total min:1.0, blank:false
+
+        flag min:1, nullable:true
     }
 
     static belongsTo = [table:Table]

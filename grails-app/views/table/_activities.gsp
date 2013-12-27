@@ -1,7 +1,12 @@
+<g:set var="hasFlag" value="${table?.activities.find { it.flag }}"/>
+
 <g:if test="${table?.activities}">
 	<table class="table table-hover">
 		<thead>
 			<tr>
+				<g:if test="${hasFlag}">
+					<th width="1"></th>
+				</g:if>
 				<th>Cantidad y Servicio</th>
 				<th width="1">Total</th>
 			</tr>
@@ -9,6 +14,9 @@
 		<tbody>
 			<g:each in="${table.activities}" var="activity">
 				<tr>
+					<g:if test="${hasFlag}">
+						<td>${activity.flag}</td>
+					</g:if>
 					<td>
 						<g:if test="${actionName == 'create'}">
 							<g:link controller="activity" action="show" params="[id:activity.id]">
@@ -38,7 +46,10 @@
 			</g:if>
 			<g:else>
 				<tr>
-					<td>TOTAL</td>
+					<g:if test="${hasFlag}">
+						<td></td>
+					</g:if>
+					<td></td>
 					<td><bar:totalActivities table="${table}"/></td>
 				</tr>
 			</g:else>
