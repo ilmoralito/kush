@@ -48,16 +48,24 @@
 						<g:hiddenField name="type" value="${params?.type}"/>
 						<g:hiddenField name="number" value="${params?.number}"/>
 
+						<g:if test="${mergedTables}">
+							<div class="form-group">
+								<label for="flag">Mezas</label>
+								<g:select from="${mergedTables}" name="flag" class="form-control" noSelection="['':'-Meza actual-']"/>
+							</div>
+						</g:if>
+
 						<div class="form-group">
 							<label for="service">Servicio</label>
 							<g:select from="${services}" optionKey="id" name="service" class="form-control"/>
 						</div>
+
 						<div class="form-group">
 							<label for="amount">Cantidad</label>
 							<g:textField name="amount" class="form-control"/>
 						</div>
 
-						<button type="submit" id="createServiceForm" class="btn btn-primary pull-right">Agregar</button>
+						<button type="submit" class="btn btn-primary pull-right">Agregar</button>
 					</g:form>
 				</g:if>
 				<g:else>

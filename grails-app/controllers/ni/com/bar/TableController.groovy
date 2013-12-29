@@ -50,7 +50,7 @@ class TableController {
 
             if (currentTable?.activities) {
                 for(activity in currentTable.activities) {
-                    newTable.addToActivities(service:activity.service, amount:activity.amount, total:activity.service.price * activity.amount, flag:currentTable.number)
+                    newTable.addToActivities(service:activity.service, amount:activity.amount, total:activity.service.price * activity.amount, flag:(newTable?.activities) ? currentTable.number : null)
                 }
             }
 
@@ -103,7 +103,9 @@ class TableController {
             services = LocalDrink.findAllByStatus(true)
         }
 
-    	[table:table, drinks:Drink.list(), services:services]
+        def mergedTables = table?.activities?.flag?.unique()?.findAll { it != null }
+
+    	[table:table, mergedTables:mergedTables, services:services]
     }
 
     def charge(ChargeCommand cmd, Integer number) {
