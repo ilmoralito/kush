@@ -1,16 +1,19 @@
 package ni.com.bar
 
 import grails.plugin.springsecurity.annotation.Secured
+import org.hibernate.transform.AliasToEntityMapResultTransformer
 
 @Secured(['ROLE_ADMIN', 'ROLE_USER'])
 class TableController {
 
     def tableService
+    def serviceService
 
 	static defaultAction = "index"
 	static allowedMethods = [
 		index:"GET",
         moveToTable:"GET",
+        moveActivities:"GET",
         list:"GET",
 		create:["GET", "POST"],
         charge:["GET", "POST"],
@@ -47,10 +50,11 @@ class TableController {
             }
 
             def newTable = (Table.activeByTableNumber(newTableNumber).get()) ?: new Table(number:newTableNumber)
+            def activities = currentTable?.activities
 
-            if (currentTable?.activities) {
-                for(activity in currentTable.activities) {
-                    newTable.addToActivities(service:activity.service, amount:activity.amount, total:activity.service.price * activity.amount, flag:(newTable?.activities) ? currentTable.number : null)
+            if (activities) {
+                for(activity in activities.findAll { it }) {
+                    newTable.addToActivities(service:activity.service, amount:activity.amount, total:activity.service.price * activity.amount, flag:activity.flag)
                 }
             }
 
@@ -62,6 +66,24 @@ class TableController {
         }
 
         redirect action:"index"
+    }
+
+    def moveActivities(Integer from, Integer flag, Integer to) {
+        def fromTable = Table.get(from)
+        def toTable = (Table.get(to)) ?: new Table(number:to).save()
+
+        if (!fromTable || !toTable) {
+            response.sendError 404
+        }
+
+        def activities = fromTable.activities.findAll { it.flag == flag }
+
+        for(activity in activities) {
+            fromTable.removeFromActivities(activity)
+            toTable.addToActivities(activity)
+        }
+
+        redirect action:"create", params:[number:fromTable.number]
     }
 
     def list(Integer number) {
@@ -78,6 +100,7 @@ class TableController {
                 response.sendError 404
             }
 
+            params.flag = (params?.flag) ?: table.number
             def activity = new Activity(params)
 
             table.addToActivities(activity)
@@ -91,21 +114,16 @@ class TableController {
     	}
 
     	def table = (tableService.tableActive(params.int("number"))) ?: new Table(number:params.int("number")).save()
-        def services
+        def activities = table?.activities
+        def services = serviceService.listActiveServicesByType(params?.type)
+        def flags = activities?.flag?.unique()
 
-        if (params?.type == 'drink' || !params.type) {
-            services = Drink.findAllByStatus(true)
-        } else if (params?.type == 'food') {
-            services = Food.findAllByStatus(true)
-        } else if (params?.type == "cigar") {
-            services = Cigar.findAllByStatus(true)
-        } else {
-            services = LocalDrink.findAllByStatus(true)
-        }
-
-        def mergedTables = table?.activities?.flag?.unique()?.findAll { it != null }
-
-    	[table:table, mergedTables:mergedTables, services:services]
+    	[
+            table:table,
+            activities:activities.findAll { it },
+            flags:(flags?.size() > 1) ? flags.sort() : null,
+            services:services
+        ]
     }
 
     def charge(ChargeCommand cmd, Integer number) {

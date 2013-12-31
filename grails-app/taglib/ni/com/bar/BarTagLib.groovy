@@ -22,6 +22,29 @@ class BarTagLib {
 		out << tableService.totalActivities(table)
 	}
 
+	def totalActivitiesByFlag = { attrs ->
+		def flag = attrs.int("flag")
+		def number = attrs.int("number")
+
+		def criteria = Table.createCriteria()
+		def result = criteria.get() {
+			eq "status", false
+			eq "number", number
+
+			activities {
+				eq "flag", flag
+			}
+
+			projections {
+				activities {
+					sum "total"
+				}
+			}
+		}
+
+		out << result
+	}
+
 	def totalFees = { attrs ->
 		def table = attrs.table
 

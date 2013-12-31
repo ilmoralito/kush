@@ -23,4 +23,28 @@ class ServiceService {
     			return Service.list()
     	}
     }
+
+    def listActiveServicesByType(String type) {
+        def services
+
+         switch(type) {
+            case "drink":
+                services = Drink.findAllByStatus(true)
+            break
+            case "food":
+                services = Food.findAllByStatus(true)
+            break
+            case "cigar":
+                services = Cigar.findAllByStatus(true)
+            break
+            case "localDrink":
+                services = LocalDrink.findAllByStatus(true)
+            break
+            default:
+                services = Drink.findAllByStatus(true)
+        }
+
+        services
+    }
+
 }

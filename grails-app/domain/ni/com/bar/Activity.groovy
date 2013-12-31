@@ -21,10 +21,6 @@ class Activity {
 
     static belongsTo = [table:Table]
 
-    static namedQueries = {
-
-    }
-
     def beforeInsert() {
     	total = service.price * amount
     }
@@ -33,6 +29,6 @@ class Activity {
         total = service.price * amount
     }
 
-    String toString() { service }
+    String toString() { "$amount $service" }
 
 }
