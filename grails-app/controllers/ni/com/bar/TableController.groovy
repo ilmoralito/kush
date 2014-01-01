@@ -154,8 +154,10 @@ class TableController {
         }
 
         def total = tableService.calcTotalPayment(table)
+        def activities = table?.activities
+        def flags = activities?.flag?.unique()
 
-        [table:table, total:total]
+        [table:table, activities:activities, fees:table?.fees, flags:(flags?.size() > 1) ? flags.sort() : null, total:total]
     }
 
     def fees(Long id) {
@@ -165,7 +167,7 @@ class TableController {
             response.sendError 404
         }
 
-        [fees:table?.fees]
+        [fees:table?.fees, id:id, number:table.number]
     }
 
     def activity(Long id) {

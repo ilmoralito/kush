@@ -8,19 +8,21 @@
 					<h4>Meza ${flag}</h4>
 				</div>
 				<div class="col-md-6">
-					<div class="btn-group pull-right">
-						<button type="button" data-toggle="dropdown" class="btn btn-link btn-xs dropdown-toggle">
-							<span class="glyphicon glyphicon-align-justify"></span></span>
-						</button>
-						<ul class="dropdown-menu">
-							<li role="presentation" class="dropdown-header">Mover</li>
-							<g:each in="${1..tables}" var="n">
-								<g:if test="${n != table.number}">
-									<li><g:link action="moveActivities" params="[from:table.id, flag:flag, to:n]">${n}</g:link></li>
-								</g:if>
-							</g:each>
-						</ul>
-					</div>
+					<g:if test="${actionName == 'create'}">
+						<div class="btn-group pull-right">
+							<button type="button" data-toggle="dropdown" class="btn btn-link btn-xs dropdown-toggle">
+								<span class="glyphicon glyphicon-align-justify"></span></span>
+							</button>
+							<ul class="dropdown-menu">
+								<li role="presentation" class="dropdown-header">Mover</li>
+								<g:each in="${1..tables}" var="n">
+									<g:if test="${n != table.number}">
+										<li><g:link action="moveActivities" params="[from:table.id, flag:flag, to:n]">${n}</g:link></li>
+									</g:if>
+								</g:each>
+							</ul>
+						</div>
+					</g:if>
 				</div>
 			</div>
 			<table class="table table-hover">

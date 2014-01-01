@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Abonos</title>
-	<r:require modules="bootstrap, charge"/>
+	<r:require modules="bootstrap-css, app"/>
 </head>
 <body>
 	<table class="table table-hover">
@@ -22,7 +22,7 @@
 			</g:each>
 			<tr>
 				<td></td>
-				<td><bar:totalFees table="${table}"/></td>
+				<td><bar:totalFees fees="${fees}"/></td>
 			</tr>
 		</tbody>
 	</table>

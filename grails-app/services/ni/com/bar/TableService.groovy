@@ -12,7 +12,7 @@ class TableService {
 			eq "status", false
 		}
 
-		return table
+		table
     }
 
     def totalActivities(Table table) {
@@ -27,7 +27,7 @@ class TableService {
             }
         }
 
-        return totalActivities
+        totalActivities
     }
 
     def totalFees(Table table) {
@@ -40,12 +40,13 @@ class TableService {
             }
         }
 
-        return totalFees
-    }
+        totalFees
+     }
+
 
     def calcTotalPayment(Table table) {
         def total = totalActivities(table) - (totalFees(table) ?: 0)
 
-        return total
+        total
     }
 }

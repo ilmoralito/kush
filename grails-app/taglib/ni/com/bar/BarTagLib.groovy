@@ -46,9 +46,14 @@ class BarTagLib {
 	}
 
 	def totalFees = { attrs ->
-		def table = attrs.table
+		def fees = attrs.fees
+		def total = 0
 
-		out << tableService.totalFees(table)
+		for(fee in fees) {
+			total = total + fee.fee
+		}
+
+		out << total
 	}
 
 	def totalPayment = { attrs ->

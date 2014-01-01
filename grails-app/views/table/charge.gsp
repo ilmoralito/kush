@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>${activity}</title>
-	<r:require modules="bootstrap, charge"/>
+	<r:require modules="bootstrap-css, charge"/>
 </head>
 <body>
 	<g:hasErrors bean="${cmd}">

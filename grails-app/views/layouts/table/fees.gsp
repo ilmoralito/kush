@@ -10,9 +10,7 @@
 	<g:render template="/layouts/navbar"/>
 
 	<div class="container">
-
 		<g:render template="/layouts/table/sub-menu"/>
-
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
 				<g:layoutBody/>
