@@ -28,7 +28,7 @@
 		</table>
 	</g:if>
 	<g:else>
-		...
+		<h3>Sin datos que mostrar...</h3>
 	</g:else>
 </body>
 </html>

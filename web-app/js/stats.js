@@ -1,9 +1,7 @@
-$( "#from" ).datepicker({ 
-	dateFormat: "yy-mm-dd",
-	maxDate: 0
+$( "#from" ).datepicker({
+	dateFormat: "yy-mm-dd"
 });
 
-$( "#to" ).datepicker({ 
-	dateFormat: "yy-mm-dd",
-	maxDate: 0
+$( "#to" ).datepicker({
+	dateFormat: "yy-mm-dd"
 });
