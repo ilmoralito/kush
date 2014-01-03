@@ -76,17 +76,4 @@ grails.project.dependency.resolution = {
         compile ":jquery-ui:1.10.3"
         compile ':cloud-foundry:1.2.3'
     }
-
-    environments {
-        production {
-            dataSource {
-                dbCreate = "update"
-                url = 'jdbc:mysql://localhost/db?useUnicode=true&characterEncoding=utf8'
-                dialect = org.hibernate.dialect.MySQLInnoDBDialect
-                driverClassName = 'com.mysql.jdbc.Driver'
-                username = 'user'
-                password = "password"
-            }
-        }
-    }
 }
