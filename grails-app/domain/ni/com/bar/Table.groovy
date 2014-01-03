@@ -18,10 +18,6 @@ class Table {
     	change min:0.0, nullable:true
     }
 
-    static mapping = {
-    	version false
-    }
-
     static namedQueries = {
     	todayActivities {
             def today = new Date()
@@ -79,7 +75,14 @@ class Table {
 
     List activities
     List fees
+
     static hasMany = [activities:Activity, fees:Fee]
+
+    static mapping = {
+        version false
+        table "tables"
+        change column:"cambio"
+    }
 
     String toString() { number }
 
