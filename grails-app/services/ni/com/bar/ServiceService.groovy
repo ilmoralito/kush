@@ -8,7 +8,7 @@ class ServiceService {
     def list(String service) {
     	switch(service) {
     		case "drink":
-    			return Drink.list()
+    			return Drink.list(sort:"brand")
     		break
     		case "food":
     			return Food.list()
@@ -29,16 +29,16 @@ class ServiceService {
 
          switch(type) {
             case "drink":
-                services = Drink.findAllByStatus(true)
+                services = Drink.findAllByStatus(true, [sort:"brand"])
             break
             case "food":
-                services = Food.findAllByStatus(true)
+                services = Food.findAllByStatus(true, [sort:"name"])
             break
             case "cigar":
-                services = Cigar.findAllByStatus(true)
+                services = Cigar.findAllByStatus(true, [sort:"brand"])
             break
             case "localDrink":
-                services = LocalDrink.findAllByStatus(true)
+                services = LocalDrink.findAllByStatus(true, [sort:"name"])
             break
             default:
                 services = Drink.findAllByStatus(true)
