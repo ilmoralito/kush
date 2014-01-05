@@ -54,13 +54,13 @@ class ServiceController {
     	}
 
         if (type == "drink") {
-    		return [service:new Drink(params)]
+    		return [service:new Drink()]
     	} else if (type == "food") {
-    		return [service:new Food(params)]
+    		return [service:new Food()]
     	} else if (type == "cigar") {
-    		return [service:new Cigar(params)]
+    		return [service:new Cigar()]
     	} else {
-            return [service:new LocalDrink(params)]
+            return [service:new LocalDrink()]
         }
     }
 

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="layout" content="main">
-	<title></title>
+	<title>Crear servicio</title>
 	<r:require modules="bootstrap, service"/>
 </head>
 <body>

@@ -69,10 +69,13 @@
 					</tr>
 				</g:each>
 				<tr>
-					<td>TOTAL</td>
+					<td></td>
 					<td><strong><bar:totalActivities table="${table}"/></strong></td>
 				</tr>
 			</tbody>
 		</table>
 	</g:else>
 </g:if>
+<g:else>
+	<h2>...</h2>
+</g:else>
