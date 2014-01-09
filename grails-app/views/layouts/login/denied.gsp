@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title><g:layoutTitle default="g.message(code:'springSecurity.denied.title')"></title>
+	<title><g:layoutTitle default="g.message(code:'springSecurity.denied.title')"/></title>
 	<r:layoutResources/>
 </head>
 <body>
