@@ -27,8 +27,6 @@ class Table {
         }
 
         active {
-            todayActivities()
-
             eq "status", false
         }
 

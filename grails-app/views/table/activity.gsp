@@ -8,6 +8,6 @@
 </head>
 <body>
 	<g:render template="activities"/>
-	<g:link action="list" params="[number:table.number]">Regresar</g:link>
+	<g:link action="list" params="[number:table.number]" class="btn btn-primary">Regresar</g:link>
 </body>
 </html>

@@ -70,7 +70,7 @@ class TableController {
 
     def moveActivities(Integer from, Integer flag, Integer to) {
         def fromTable = Table.get(from)
-        def toTable = (Table.get(to)) ?: new Table(number:to).save()
+        def toTable = (Table.findByNumberAndStatus(to, false)) ?: new Table(number:to).save()
 
         if (!fromTable || !toTable) {
             response.sendError 404
@@ -173,11 +173,14 @@ class TableController {
     def activity(Long id) {
         def table = Table.get(id)
 
-        if (!id) {
+        if (!table) {
             response.sendError 404
         }
 
-        [table:table]
+        def activities = table?.activities
+        def flags = activities?.flag?.unique()
+
+        [table:table, activities:activities, flags:flags]
     }
 
 }
